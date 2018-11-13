@@ -1,36 +1,21 @@
 import React, { Component } from 'react';
-import {Link} from "react-router-dom";
-import {search} from "../BooksAPI.js";
 
 export default class Search extends Component {
-
-	constructor(props) {
-		super(props);
-		this.state = {
-			searchInput: ""
-		}
-	}
-	
-	handleChange = async(event) => {
-		try {
-			const searchInput = event.target.value;
-			this.setState({searchInput});
-			const results = await search(searchInput)
-			console.log(results)
-		} catch(error) {
-			console.log(error);
-		}
-	}
-
-
 	render() {
 		return (
-          <div className="search-books">
+			          <div className="search-books">
             <div className="search-books-bar">
-              <Link className="close-search" to={"/"}>Home</Link>
+              <a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
               <div className="search-books-input-wrapper">
+                {/*
+                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
+                  You can find these search terms here:
+                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
 
-                <input type="text" placeholder="Search by title or author" onChange={this.handleChange} value={this.state.searchInput} />
+                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
+                  you don't find a specific author or title. Every search is limited by search terms.
+                */}
+                <input type="text" placeholder="Search by title or author"/>
 
               </div>
             </div>
