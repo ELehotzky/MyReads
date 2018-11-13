@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Bookshelf from "./Bookshelf.js"
-import AddBook from "./AddBook.js"
+import SearchBtn from "./SearchBtn.js"
 import {getAll} from "../BooksAPI.js"
 
 export default class Home extends Component {
@@ -27,7 +27,7 @@ export default class Home extends Component {
               <Bookshelf title="Want to Read" books={this.props.wantToRead} moveShelf={this.props.moveShelf} />
               <Bookshelf title="Read" books={this.props.read} moveShelf={this.props.moveShelf} />
             </div>
-            <AddBook />
+            <SearchBtn />
           </div>
 		);
 	}
