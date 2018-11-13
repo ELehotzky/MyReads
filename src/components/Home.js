@@ -23,9 +23,9 @@ export default class Home extends Component {
               <h1>MyReads</h1>
             </div>
             <div className="list-books-content">
-              <Bookshelf title="Currently Reading" books={this.props.currentlyReading} />
-              <Bookshelf title="Want to Read" books={this.props.wantToRead} />
-              <Bookshelf title="Read" books={this.props.read} />
+              <Bookshelf title="Currently Reading" books={this.props.currentlyReading} moveShelf={this.props.moveShelf} />
+              <Bookshelf title="Want to Read" books={this.props.wantToRead} moveShelf={this.props.moveShelf} />
+              <Bookshelf title="Read" books={this.props.read} moveShelf={this.props.moveShelf} />
             </div>
             <AddBook />
           </div>

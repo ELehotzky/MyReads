@@ -10,6 +10,7 @@ export default class index extends Component {
 			currentlyReading: [],
 			wantToRead: [],
 			read: [],
+			// Add books to shelves based on status.
 			addBooks: (books) => {
 				const currentlyReading = books.filter((book) => book.shelf === "currentlyReading");
 				const read = books.filter((book) => book.shelf === "read");
@@ -20,8 +21,20 @@ export default class index extends Component {
 					read, 
 					wantToRead
 				});
+			},
+			// If the user moves a book, check that it's not already on the shelf. If it isn't, move it.
+			moveShelf: (book, newShelf, allShelves) => {
+				console.log(newShelf);
+				const newBooks = this.state.books.map(allBooks => {
+					const foundId = allShelves[newShelf].find(
+						bookId => bookId === allBooks.id);
+					if (foundId) {
+						allBooks.shelf = newShelf;
+					}
+					return allBooks;
+				});
+				this.state.addBooks(newBooks);
 			}
-
 		}
 	}
 
