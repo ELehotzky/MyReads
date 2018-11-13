@@ -4,6 +4,7 @@ import './App.css'
 import {Switch, Route} from "react-router-dom";
 import Home from "./components/Home.js"
 import Search from "./components/Search.js"
+import Provider, {MyContext} from "./Provider/"
 
 class BooksApp extends React.Component {
   state = {
@@ -19,11 +20,16 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
+      <Provider>
         <Switch>
-          <Route exact path={"/"} component={Home} />
+          <Route exact path={"/"} render={ () => (
+            <MyContext.Consumer>{context => <Home {...context} /> }
+            </MyContext.Consumer> 
+            )} />
           <Route exact path={"/search"} component={Search} />
 
         </Switch>
+        </Provider>
       </div>
     )
   }
