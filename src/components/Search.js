@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
-import {search} from "../BooksAPI.js";
+import {search, getAll} from "../BooksAPI.js";
 import Book from "./Book.js"
 
 export default class Search extends Component {
@@ -13,7 +13,14 @@ export default class Search extends Component {
 		}
 	}
 
-
+	async componentDidMount() {
+		try {
+			const books = await getAll();
+			this.props.addBooks(books);
+		} catch(error) {
+			console.log(error)
+		}
+	}
 
 	handleChange = async event => {
 		try {
@@ -34,8 +41,6 @@ export default class Search extends Component {
 		}
 	}
 
-
-
 	render() {
 		return (
 			          <div className="search-books">
@@ -50,13 +55,18 @@ export default class Search extends Component {
               	{this.state.books.length > 0 && 
               		this.state.books.map(
               			(book) => {
-              		const foundShelf = this.state.books.filter(
+              		const foundShelf = this.state.books.find(
               			(searchBook) => searchBook.id === book.id )
-              		console.log(foundShelf);
+              		if (foundShelf) {
+              			book.shelf = foundShelf.shelf;
+              		} else {
+              			book.shelf = "none";
+              		}
               		return (
-              			<Book key={book.id} {...book} moveShelf={this.props.moveShelf} /> 
+              			<Book key={book.id} {...book} shelf={foundShelf} moveShelf={this.props.moveShelf} /> 
               		);
               	})}
+              		{this.state.length === 0 && <h1>No Results Found</h1> }
               </ol>
             </div>
           </div>

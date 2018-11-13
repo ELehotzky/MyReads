@@ -4,10 +4,11 @@ import {update} from "../BooksAPI.js";
 export default class Book extends Component {
 	
     handleChange = async(event) => {
+      event.persist();
       try {
-        const bookshelf = event.target.value
-        const result = await update(this.props, bookshelf);
-        this.props.moveShelf(this.props, bookshelf, result);
+        const shelf = event.target.value
+        const result = await update(this.props, shelf);
+        this.props.moveShelf(this.props, shelf, result);
       } catch (error) {
         console.log(error)
       }
