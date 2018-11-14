@@ -22,7 +22,7 @@ export default class Search extends Component {
 		}
 	}
 
-	handleChange = async event => {
+	handleChange = async (event) => {
 		try {
 			const searchInput = event.target.value;
 			this.setState({searchInput})
@@ -43,18 +43,16 @@ export default class Search extends Component {
 
 	render() {
 		return (
-			          <div className="search-books">
-            <div className="search-books-bar">
-              <Link to={"/"} className="close-search" >Close</Link>
-              <div className="search-books-input-wrapper">
-                <input type="text" value={this.state.searchInput} onChange={this.handleChange} placeholder="Search by title or author" />
-              </div>
-            </div>
+			<div className="search-books">
+            	<div className="search-books-bar">
+              	<Link to={"/"} className="close-search" >Close</Link>
+              		<div className="search-books-input-wrapper">
+                	<input type="text" value={this.state.searchInput} onChange={this.handleChange} placeholder="Search by title or author" />
+              		</div>
+           		 </div>
             <div className="search-books-results">
               <ol className="books-grid">
-              	{this.state.books.length > 0 && 
-              		this.state.books.map(
-              			(book) => {
+              	{this.state.books.length >= 1 && this.state.books.map((book) => {
               		const foundShelf = this.state.books.find(
               			(searchBook) => searchBook.id === book.id )
               		if (foundShelf) {
