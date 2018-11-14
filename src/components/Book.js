@@ -3,7 +3,7 @@ import {update} from "../BooksAPI.js";
 
 export default class Book extends Component {
 	
-    handleChange = async(event) => {
+    handleChange = async (event) => {
       event.persist();
       try {
         const shelf = event.target.value

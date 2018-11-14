@@ -13,7 +13,7 @@ export default class Search extends Component {
 		}
 	}
 
-	async componentDidMount() {
+		async componentDidMount() {
 		try {
 			const books = await getAll();
 			this.props.addBooks(books);
@@ -22,7 +22,7 @@ export default class Search extends Component {
 		}
 	}
 
-	handleChange = async (event) => {
+		handleChange = async (event) => {
 		try {
 			const searchInput = event.target.value;
 			this.setState({searchInput})
@@ -54,7 +54,7 @@ export default class Search extends Component {
               <ol className="books-grid">
               	{this.state.books.length >= 1 && this.state.books.map((book) => {
               		const foundShelf = this.state.books.find(
-              			(searchBook) => searchBook.id === book.id )
+              			(searchedBook) => searchedBook.id === book.id )
               		if (foundShelf) {
               			book.shelf = foundShelf.shelf;
               		} else {
@@ -64,7 +64,7 @@ export default class Search extends Component {
               			<Book key={book.id} {...book} shelf={foundShelf} moveShelf={this.props.moveShelf} /> 
               		);
               	})}
-              		{this.state.length === 0 && <h1>No Results Found</h1> }
+              		{this.state.books.length === 0 && <h1>No Results Found</h1> }
               </ol>
             </div>
           </div>
