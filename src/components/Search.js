@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
-import {search, getAll} from "../BooksAPI.js";
+import {getAll} from "../BooksAPI.js";
+import {search} from "../BooksAPI.js";
 import Book from "./Book.js"
 
 export default class Search extends Component {
@@ -13,7 +14,7 @@ export default class Search extends Component {
 		}
 	}
 
-		async componentDidMount() {
+	async componentDidMount() {
 		try {
 			const books = await getAll();
 			this.props.addBooks(books);
@@ -24,7 +25,7 @@ export default class Search extends Component {
 
 		handleChange = async (event) => {
 		try {
-			const searchInput = event.target.value;
+			let searchInput = event.target.value;
 			this.setState({searchInput})
 			if (searchInput.trim()) {
 				const results = await search(searchInput);
@@ -53,7 +54,7 @@ export default class Search extends Component {
             <div className="search-books-results">
               <ol className="books-grid">
               	{this.state.books.length >= 1 && this.state.books.map((book) => {
-              		const foundShelf = this.state.books.find(
+              		const foundShelf = this.props.books.find(
               			(searchedBook) => searchedBook.id === book.id )
               		if (foundShelf) {
               			book.shelf = foundShelf.shelf;
@@ -61,7 +62,7 @@ export default class Search extends Component {
               			book.shelf = "none";
               		}
               		return (
-              			<Book key={book.id} {...book} shelf={foundShelf} moveShelf={this.props.moveShelf} /> 
+              			<Book key={book.id} {...book} moveShelf={this.props.moveShelf} /> 
               		);
               	})}
               		{this.state.books.length === 0 && <h1>No Results Found</h1> }

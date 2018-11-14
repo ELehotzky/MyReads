@@ -24,9 +24,9 @@ export default class index extends Component {
 			},
 			// If the user moves a book, check that it's not already on the shelf. If it isn't, move it.
 			moveShelf: (book, newShelf, allShelves) => {
-				const newBooks = this.state.books.map(allBooks => {
+				const newBooks = this.state.books.map((allBooks) => {
 					const foundId = allShelves[newShelf].find(
-						bookId => bookId === allBooks.id);
+						(bookId) => bookId === allBooks.id);
 					if (foundId) {
 						allBooks.shelf = newShelf;
 					}
